@@ -2,12 +2,10 @@
 Language translator made in Python using customtkinter and googletrans libraries.
 
 ## Features
-<ul>
-<li>Translating a text and saving it in visible library</li> 
-<li>Choosing between several languages</li> 
-<li>Deleting previous translations by clicking on them</li> 
-<li>Library is saved in json file, so it remembers your previous translations</li> 
-</ul>
+- Translating a text and saving it in visible library
+- Choosing between several languages
+- Deleting previous translations by clicking on them
+- Library is saved in json file, so it remembers your previous translations
 
 ## Screenshots
 <p align="left"><img src="CtkTranslator.png"></p>
@@ -30,9 +28,7 @@ self.destination.grid(row=1, column=1, padx=8)
 
 
 ## Python Pip
-<ul>
-<li>pip install customtkinter</li>
-<li>pip install googletrans==3.1.0a0</li>
-</ul>
-<br>
-It needs to be that exact version of googletrans, because the newest one is not working.
+- pip install customtkinter
+- pip install googletrans==3.1.0a0
+
+**It needs to be that exact version of googletrans, because the newest one is not working.**

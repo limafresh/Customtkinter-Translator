@@ -1,6 +1,7 @@
 import json
 import customtkinter as ctk
-from googletrans import Translator
+from googletrans import Translator, LANGUAGES
+from CTkScrollableDropdown import CTkScrollableDropdown
 
 # Preparing translator and library
 translator = Translator()
@@ -30,7 +31,7 @@ class TranslatorApp(ctk.CTk):
         super().__init__()
 
         # Root
-        self.geometry("350x740")
+        self.geometry("350x560")
         self.title("Customtkinter Translator")
         self.resizable(False, False)
 
@@ -46,10 +47,10 @@ class TranslatorApp(ctk.CTk):
         self.frame2.pack(padx=20, fill="x")
 
         # Frame1 widgets
-        self.title = ctk.CTkLabel(master=self.frame1, text="Ctk Translator", font=ctk.CTkFont(size=30, weight="bold"))
-        self.title.pack(pady=30)
+        self.app_title = ctk.CTkLabel(master=self.frame1, text="Ctk Translator", font=ctk.CTkFont(size=30, weight="bold"))
+        self.app_title.pack(pady=30)  # Renamed because CTkScrollableDropdown thinks it's a window title, but it's CTkLabel 
 
-        self.library_frame = ctk.CTkScrollableFrame(master=self.frame1, width=265, height=480, corner_radius=0)
+        self.library_frame = ctk.CTkScrollableFrame(master=self.frame1, width=265, height=300, corner_radius=0)
         self.library_frame.pack()
 
         self.user_input = ctk.CTkEntry(master=self.frame1, width=285,
@@ -66,14 +67,16 @@ class TranslatorApp(ctk.CTk):
 
         self.destination_title = ctk.CTkLabel(master=self.frame2, text="Destination", font=ctk.CTkFont(size=13))
         self.destination_title.grid(row=0, column=1, padx=10)
-        self.source = ctk.CTkOptionMenu(master=self.frame2, width=125, corner_radius=0,
-                                        values=["en", "fr", "it", "de", "es", "pl"])
-
+        
+        self.source = ctk.CTkOptionMenu(master=self.frame2, width=125, corner_radius=0)
         self.source.grid(row=1, column=0, padx=18)
+        CTkScrollableDropdown(self.source, values=list(LANGUAGES.keys()), y=-220)
+        self.source.set("en")
 
-        self.destination = ctk.CTkOptionMenu(master=self.frame2, width=125, corner_radius=0,
-                                             values=["pl", "es", "de", "it", "fr", "en"])
+        self.destination = ctk.CTkOptionMenu(master=self.frame2, width=125, corner_radius=0)
         self.destination.grid(row=1, column=1, padx=8)
+        CTkScrollableDropdown(self.destination, values=list(LANGUAGES.keys()), y=-220)
+        self.destination.set("pl")
 
         # Spawning previous translations
         for i in range(num):
