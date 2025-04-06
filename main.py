@@ -57,6 +57,7 @@ class TranslatorApp(ctk.CTk):
                                        placeholder_text="Input text you want to translate",
                                        corner_radius=0)
         self.user_input.pack()
+
         self.button = ctk.CTkButton(master=self.frame1, width=285, text="Enter", corner_radius=0,
                                     command=lambda: translate())
         self.button.pack()
@@ -67,7 +68,7 @@ class TranslatorApp(ctk.CTk):
 
         self.destination_title = ctk.CTkLabel(master=self.frame2, text="Destination", font=ctk.CTkFont(size=13))
         self.destination_title.grid(row=0, column=1, padx=10)
-        
+
         self.source = ctk.CTkOptionMenu(master=self.frame2, width=125, corner_radius=0)
         self.source.grid(row=1, column=0, padx=18)
         CTkScrollableDropdown(self.source, values=list(LANGUAGES.keys()), y=-220)
@@ -118,6 +119,8 @@ class TranslatorApp(ctk.CTk):
             del library[text]
             with open("library.json", "w") as file:
                 json.dump(library, file)
+
+        self.user_input.bind("<Return>", lambda e: translate())  # Hotkey
 
 
 if __name__ == "__main__":
